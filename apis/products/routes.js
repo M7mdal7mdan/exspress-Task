@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
-    fetchProducts,postProducts,deleteProducts
+    fetchProducts,postProducts,deleteProducts,updateProducts
 } = require("./controllers")
 
 
@@ -13,5 +13,9 @@ router.post("/", postProducts);
 
 // Products Delete
 router.delete("/:productId",deleteProducts);
+
+//Product Update
+router.put("/:productId", updateProducts);
+// ("/api/products/productID")
 
 module.exports = router
