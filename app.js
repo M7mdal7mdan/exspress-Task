@@ -1,37 +1,17 @@
 const express = require("express");
-const res = require("express/lib/response");
-
+const productsRoutes = require("./apis/products/routes");;
 const app = express();
-app.use(express.json()); //middleware
-let products = require("./products");
+const connectDb = require("./db/database");
 
 
 
-  app.get("/products", (req, res) => {
-    res.json(req.body);
-  });
+//middleware
+app.use(express.json()); 
+app.use("/api/products",productsRoutes);
 
-  app.post("/products",(req,res) =>{
-      const id = products.length +1;
-      const newProduct = {id:id, ...req.body};
-      products.push(newProduct);
-      res.status(201);
-      res.json(newProduct)
-  })
 
-  app.delete("/products/:productId",(req,res) =>{
-      const {productId} = req.params;
-      const foundProduct = products.find(product => product.id ===+productId)
-      if(foundProduct){
-          const newArray = products.filter((product) => product.id !== +productId);
-          products = newArray
-          res.status(204).end();
-          res.json(newArray)
 
-      }else{
-        res.status(404).end();
-      }
-  })
+connectDb();
   app.listen(8000, () => {
     console.log("The application is running on localhost:8000");
   });
