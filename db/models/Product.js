@@ -1,13 +1,21 @@
+const { type } = require("express/lib/response");
 const mongoose = require("mongoose");
+const mongooseSlugPlugin = require("mongoose-slug-plugin");
 
 const ProductSchema = new mongoose.Schema({
-    name: String,
+    name:{type: String , required: true},
     slug: String,
     image: String,
     description: String,
     color: String,
-    quantity: Number,
-    price: Number
+    quantity:{type: Number , min: 0} ,
+    price: {type: Number, default: 20}
+},
+
+{
+    timestamps: true
 })
+
+ProductSchema.plugin(mongooseSlugPlugin,{tmpl:"<%=name%>"});
 
 module.exports = mongoose.model("Product",ProductSchema);

@@ -10,26 +10,28 @@ exports.fetchProducts = async (req, res) => {
     res.json(productArray);
   };
 
-  exports.postProducts =(req,res) =>{
-      const id = products.length +1;
-      const newProduct = {id:id, ...req.body};
-      products.push(newProduct);
+  exports.postProducts = async (req,res) =>{
+      const newProduct = await Product.create(req.body)
       res.status(201);
       res.json(newProduct)
   };
 
-  exports.deleteProducts =(req,res) =>{
-      const {productId} = req.params;
-      const foundProduct = products.find(product => product.id ===+productId)
+  exports.deleteProducts = async (req,res) =>{
+     try{ 
+     const {productId} = req.params;
+      const foundProduct = await Product.findByIdAndDelete({_id: productId})
       if(foundProduct){
-          const newArray = products.filter((product) => product.id !== +productId);
-          products = newArray
+         
           res.status(204).end();
           res.json(newArray)
 
       }else{
         res.status(404).end();
       }
+    }catch(error){
+        
+    }
+
   };
 
 
