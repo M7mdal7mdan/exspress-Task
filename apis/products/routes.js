@@ -18,4 +18,6 @@ router.delete("/:productId",deleteProducts);
 router.put("/:productId", updateProducts);
 // ("/api/products/productID")
 
+
+
 module.exports = router
