@@ -15,7 +15,9 @@ app.use(logger);
 
 
 //Router
+app.use("/api",userRoutes);
 app.use("/api/products",productsRoutes);
+app.use("/api/shops",shopsRoutes);
 
 
 //middleware

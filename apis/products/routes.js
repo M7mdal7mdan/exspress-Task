@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
-    fetchProducts,postProducts,deleteProducts,updateProducts, fetchProductt
+    fetchProducts,deleteProducts,updateProducts, fetchProductt
 } = require("./controllers")
 
 //param meddileware
@@ -19,8 +19,6 @@ router.param("productId", async(req,res,next,productId)=>{
 // Products Create
 router.get("/",fetchProducts);
 
-// Products List
-router.post("/", postProducts);
 
 // Products Delete
 router.delete("/:productId",deleteProducts);

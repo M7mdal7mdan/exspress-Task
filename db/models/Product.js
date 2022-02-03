@@ -9,7 +9,8 @@ const ProductSchema = new mongoose.Schema({
     description: String,
     color: String,
     quantity:{type: Number , min: 0} ,
-    price: {type: Number, default: 20}
+    price: {type: Number, default: 20},
+    Shop:{type:mongoose.Schema.Types.ObjectId,ref:"Shop"},
 },
 
 {
